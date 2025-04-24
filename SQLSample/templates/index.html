@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kulanıcı yYönetimi crm</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Kulanıcı Yönetimi</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="isim" placeholder="İsim" required>
+        <input type="text" name="yas" placeholder="Yaş" required>
+        <button type="submit">Kayıt Ekle</button>
+    </form>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>İsim</th>
+            <th>Yaş</th>
+            <th>İşlemler</th>
+        </tr>
+        {% for kullanici in kullanicilar %}
+        <tr>
+            <td>{{ kullanici[0] }}</td>
+            <td>{{ kullanici[1] }}</td>
+            <td>{{ kullanici[2] }}</td>
+            <td>
+                <form action="/delete/{{ kullanici[0]}}" method="POST" style="display: inline;">
+                    <button type="submit">Kayıt Sil</button>
+                </form>
+                <form action="/update/{{ kullanici[0] }}" method="POST">  
+                    <input type="text" name="isim" placeholder="Yeni İsim" required>  
+                    <input type="text" name="yas" placeholder="Yeni Yaş" required>  
+                    <button type="submit">Kayıt Güncelle</button>  
+                </form>  
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
